@@ -10,18 +10,28 @@
 <body>
 <h1>PURCHASES</h1>
 
+<div class="buttonH">
+    {{#showPrev}}
+    <a href="/?page={{prevPage}}{{#category}}&category={{.}}{{/category}}"><button>Previous</button></a>
+    {{/showPrev}}
+
+    {{#showNext}}
+    <a href="/?page={{nextPage}}{{#category}}&category={{.}}{{/category}}"><button>Next</button></a>
+    {{/showNext}}
+</div>
+
 <form action="/" method="get"></form>
 
 
 <div class="buttonH">
 
-<a href="/"><button>All</button></a>
-<a href="/?category=Furniture"><button>Furniture</button></a>
-<a href="/?category=Alcohol"><button>Alcohol</button></a>
-<a href="/?category=Toiletries"><button>Toiletries</button></a>
-<a href="/?category=Shoes"><button>Shoes</button></a>
-<a href="/?category=Food"><button>Food</button></a>
-<a href="/?category=Jewelry"><button>Jewelry</button></a>
+    <a href="/"><button>All</button></a>
+    <a href="/?category=Furniture"><button>Furniture</button></a>
+    <a href="/?category=Alcohol"><button>Alcohol</button></a>
+    <a href="/?category=Toiletries"><button>Toiletries</button></a>
+    <a href="/?category=Shoes"><button>Shoes</button></a>
+    <a href="/?category=Food"><button>Food</button></a>
+    <a href="/?category=Jewelry"><button>Jewelry</button></a>
 
 </div>
 

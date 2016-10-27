@@ -1,6 +1,8 @@
 package com.theironyard;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -51,19 +53,25 @@ public class PurchaseController {
     }
 
     @RequestMapping(path = "/", method = RequestMethod.GET)
-    public String home (Model model, String category){
-        Iterable<Purchase> plist;
-        Iterable<Customer> clist = customers.findAll();
+    public String home (Model model, String category, Integer page){
+        page = (page == null) ? 0 : page;
+        PageRequest pr = new PageRequest(page, 10);
+
+        Page<Purchase> plist;
 
         if(category != null){
-            plist = purchases.findByCategory(category);
+            plist = purchases.findByCategory(pr, category);
         }
         else {
-            plist = purchases.findAll();
+            plist = purchases.findAll(pr);
         }
 
         model.addAttribute("purchases", plist);
-        model.addAttribute("categories", category);
+        model.addAttribute("nextPage", page+1);
+        model.addAttribute("showNext", plist.hasNext());
+        model.addAttribute("prevPage", page-1);
+        model.addAttribute("showPrev", plist.hasPrevious());
+        model.addAttribute("category", category);
         return "home";
     }
 
